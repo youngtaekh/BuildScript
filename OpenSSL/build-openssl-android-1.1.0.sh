@@ -2,12 +2,12 @@
 
 MINIMUM_ANDROID_SDK_VERSION=$1
 MINIMUM_ANDROID_64_BIT_SDK_VERSION=$2
-OPENSSL_FULL_VERSION="openssl-1.1.1c"
+OPENSSL_FULL_VERSION="openssl-1.1.0h"
 
 if [ ! -f "$OPENSSL_FULL_VERSION.tar.gz" ]; then
     curl -O https://www.openssl.org/source/$OPENSSL_FULL_VERSION.tar.gz
 fi
-tar -xvzf $OPENSSL_FULL_VERSION.tar.gz
+#tar -xvzf $OPENSSL_FULL_VERSION.tar.gz
 
 (cd $OPENSSL_FULL_VERSION;
 
@@ -138,8 +138,10 @@ tar -xvzf $OPENSSL_FULL_VERSION.tar.gz
          exit 1
      fi
 
-     mv libcrypto.a ${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}
+	  mv libcrypto.a ${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}
      mv libssl.a ${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}
+     mv libcrypto.so ${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}
+     mv libssl.so ${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}
 
      # copy header
      mkdir -p "${ANDROID_LIB_ROOT}/${PLATFORM_OUTPUT_DIR}/include/openssl"
